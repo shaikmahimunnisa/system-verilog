@@ -5,7 +5,7 @@ module repeat_loop;
     repeat(4) begin
 //       $display("\t the value of a=%0d",a);
        a++;
-      $display("\t the value of a=%0d i=%0d ",a,i);
+      $display("\t the value of a=%0d i=%0d ",a);
       $display("------------------------------------------");
     end
   end
