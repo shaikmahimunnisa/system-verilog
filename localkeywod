@@ -1,0 +1,21 @@
+class parent_class;
+  local bit [32:0] temp_addr;
+  
+  function new(bit[32:0] r_addr);
+   temp_addr=r_addr +10;
+  endfunction
+  
+  function  display();
+    $display("\t value of temp_addr=%0d",temp_addr);
+  endfunction
+endclass
+
+module encapsulation;
+  initial begin
+    parent_class p;
+     
+    p=new(5);
+    p.display();
+    
+  end
+endmodule
