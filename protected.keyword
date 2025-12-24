@@ -1,0 +1,34 @@
+class parent_class;
+  protected bit[32:0] temp;
+   
+  function new(bit [32:0] addr);
+    temp=addr+10;
+    endfunction
+  
+  function display();
+    $display("\t value temp=%0d",temp);
+  endfunction
+endclass
+
+class child_class extends parent_class;
+  
+  function new( bit[32:0] addr);
+    super.new (addr);
+  endfunction
+  
+  function void incre();
+    temp++;
+  endfunction
+  
+endclass
+
+module protected_key;
+  initial begin
+    child_class c = new(10);
+    
+//     c=new(10);
+    c.display();
+    
+  end
+endmodule
+  
