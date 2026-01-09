@@ -1,0 +1,23 @@
+class packet;
+rand  bit [0:3] addr;
+ rand bit [0:3] start_addr;
+rand  bit [0:3] end_addr;
+  
+  constraint add_range {addr inside {[start_addr:end_addr]};}
+  
+endclass
+
+module inside_cons;
+initial begin
+  packet pkt;
+  pkt=new();
+  
+  $display("========================================");
+  repeat(3) begin
+    pkt.randomize();
+    $display("\t the value of start_addr=%0d end_addr=%0d",pkt.start_addr,pkt.end_addr);
+    $display("\t addr=%0d",pkt.addr);
+  end
+  $display("==================================");
+end
+endmodule
