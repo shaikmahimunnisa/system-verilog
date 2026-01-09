@@ -1,0 +1,30 @@
+class packet;
+  rand bit[0:3] addr;
+  constraint addr_range{addr>5;}
+endclass
+
+class packet2 extends packet;
+  constraint addr_range{addr<5;}
+endclass
+
+module cons_inhe;
+  initial begin
+    packet pkt;
+    packet2 pkt2;
+    
+    pkt=new();
+    pkt2=new();
+    
+    $display("----------------------------------------------------");
+    repeat(5) begin pkt.randomize();
+      $display("\t PKT1:: addr=%0d",pkt.addr);
+    end
+    
+    $display("---------------------------------------------------------");
+    repeat(5)begin pkt2.randomize();
+      $display("\t PKT2:: addr=%0d",pkt2.addr);
+    end
+    
+  end
+endmodule
+            
