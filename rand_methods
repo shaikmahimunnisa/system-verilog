@@ -1,0 +1,24 @@
+class packet;
+  rand  bit[0:7] addr;
+  randc bit wr_da;
+  bit temp_wr_da;
+
+function void pre_randomize();
+  if(temp_wr_da==1) addr.rand_mode(0);
+  else addr.rand_mode(1);
+endfunction
+
+function void post_randomize();
+  temp_wr_da=wr_da;
+  $display("\t addr=%0d wr_da=%0d",addr,wr_da);
+endfunction
+endclass
+
+module rand_method;
+  initial begin
+    packet pkt;
+    pkt =new();
+    
+    repeat(4) pkt.randomize();
+  end
+  endmodule
