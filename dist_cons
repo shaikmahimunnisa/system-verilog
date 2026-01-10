@@ -1,0 +1,27 @@
+class packet;
+  rand bit[0:3] addr_1;
+  rand bit [0:3] addr_2;
+  
+  constraint addr_range1 { addr_1 dist {2:=5 , [10:12]:=8};}
+  constraint addr_range2 {addr_2 dist {2:/5 , [10:12]:/8};}
+endclass
+
+module dist_cons;
+  initial begin
+    packet pkt;
+    pkt =new();
+    
+    $display("==================================================");
+    repeat(10) begin
+      pkt.randomize();
+      $display("\t addr_1 =%0d",pkt.addr_1);
+    end
+    $display("======================================");
+    
+    repeat(10) begin
+      pkt.randomize();
+      $display("\t addr_2=%0d",pkt.addr_2);
+    end
+    $display("========================================");
+  end
+endmodule
