@@ -1,0 +1,32 @@
+class packet;
+  rand bit[0:7] addr;
+  static constraint addr_range{addr ==5;}
+endclass
+
+module static_cons;
+  initial begin
+    packet pkt1;
+    packet pkt2;
+    
+    pkt1=new();
+    pkt2=new();
+    
+    $display("before the disable");
+    repeat(3) begin
+      pkt1.randomize();
+      $display("\tpkt1.addr=%0d",pkt1.addr);
+      pkt2.randomize();
+      $display("\tpkt2.addr=%0d",pkt2.addr);
+    end
+    
+    pkt2.addr_range.constraint_mode(0);
+    
+    $display("after the disable");
+    repeat(3) begin
+      pkt1.randomize();
+      $display("\tpkt1.addr=%0d",pkt2.addr);
+      pkt2.randomize();
+      $display("\tpkt2.addr=%0d",pkt2.addr);
+    end
+  end
+endmodule
