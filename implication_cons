@@ -1,0 +1,19 @@
+class packet;
+  rand bit[0:3] addr;
+  string addr_range;
+  
+  constraint addr_rangee { (addr_range=="small") -> (addr > 8);}
+endclass
+
+module implication_cons;
+  initial begin
+    packet pkt;
+    pkt=new();
+    	
+    pkt.addr_range="small";
+    repeat(5) begin
+      pkt.randomize();
+      $display("\t addr_range=%0s addr=%0d",pkt.addr_range,pkt.addr);
+    end
+  end
+endmodule
