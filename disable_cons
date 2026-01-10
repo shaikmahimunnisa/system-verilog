@@ -1,0 +1,27 @@
+class packet;
+  rand bit [0:3]addr;
+  constraint addr_range { addr inside {5,10,15};}
+endclass
+
+module disable_cons;
+  initial begin
+    packet pkt;
+    pkt= new();
+    
+    $display("before the disable");
+    $display("\tconstraint_mode=%0d",pkt.addr_range.constraint_mode());
+    repeat (3) begin
+      pkt.randomize();
+      $display("\taddr = %0d",pkt.addr);
+    end
+    
+    pkt.addr_range.constraint_mode(0);
+    
+    $display("after the disable");
+    $display("\tconstraint_mode=%0d",pkt.addr_range.constraint_mode());
+    repeat(3) begin
+      pkt.randomize();
+      $display("\taddr = %0d",pkt.addr);
+    end
+  end
+endmodule
