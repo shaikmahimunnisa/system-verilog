@@ -1,0 +1,30 @@
+class packet;
+  rand bit[0:3] addr;
+  string addr_range;
+   
+  constraint addr_rangee { if (addr_range=="small")
+                             addr < 8 ;
+                          else
+                            addr >8;
+                         }
+endclass
+
+module if_else;
+  initial begin
+        packet pkt;
+    pkt=new();
+    
+    pkt.addr_range="small";
+    repeat(3) begin
+      pkt.randomize();
+      $display("\t addr_range=%0s addr=%0d",pkt.addr_range,pkt.addr);
+    end
+    $display("==========================================");
+    
+    pkt.addr_range="high";
+    repeat(3) begin
+      pkt.randomize();
+      $display("\taddr_range=%0s addr=%0d ",pkt.addr_range,pkt.addr);
+    end
+  end
+endmodule
