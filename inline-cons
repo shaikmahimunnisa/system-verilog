@@ -1,0 +1,15 @@
+class packet;
+ rand  int size;
+
+endclass
+
+module inline_con;
+  initial begin
+    packet p;
+    p=new();
+    
+    p.randomize() with {size>8 && size<100;};
+    $display("\t value of size=%0d",p.size);
+    
+  end
+endmodule
